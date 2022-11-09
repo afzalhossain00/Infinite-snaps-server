@@ -16,3 +16,4 @@ Here You can see the live website [Click here](https://infinite-snaps-server.ver
 
 * Vercel
 * JavaScript
+* MongoDB

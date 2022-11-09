@@ -18,6 +18,7 @@ async function run() {
 
     try {
         const serviceCollection = client.db('infiniteSnaps').collection('services');
+        const userReviewCollection = client.db('infiniteSnaps').collection('userReview');
 
         app.get('/services', async (req, res) => {
             const query = {}
@@ -32,6 +33,14 @@ async function run() {
             const service = await serviceCollection.findOne(query);
             res.send(service)
         });
+
+
+        // user review api
+        app.post('/userReview', async (req, res) => {
+            const review = req.body;
+            const resullt = await userReviewCollection.insertOne(review)
+            res.send(resullt)
+        })
     }
 
     finally {
