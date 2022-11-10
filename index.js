@@ -36,10 +36,29 @@ async function run() {
 
 
         // user review api
+        app.get('/userReview', async (req, res) => {
+            let query = {};
+            if (req.query.email) {
+                query = {
+                    email: req.query.email
+                }
+            }
+            const cursor = userReviewCollection.find(query);
+            const userReview = await cursor.toArray()
+            res.send(userReview);
+        })
+
         app.post('/userReview', async (req, res) => {
             const review = req.body;
             const resullt = await userReviewCollection.insertOne(review)
             res.send(resullt)
+        })
+
+        app.delete('/userReview/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const resullt = await userReviewCollection.deleteOne(query);
+            res.send(resullt);
         })
     }
 
