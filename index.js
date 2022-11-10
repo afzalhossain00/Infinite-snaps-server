@@ -60,6 +60,19 @@ async function run() {
             const resullt = await userReviewCollection.deleteOne(query);
             res.send(resullt);
         })
+
+        app.patch('/userReview/:id', async (req, res) => {
+            const id = req.params.id;
+            const status = req.body.status;
+            const query = { _id: ObjectId(id) };
+            const updatedDoc = {
+                $set: {
+                    status: status
+                }
+            }
+            const resullt = await userReviewCollection.updateOne(query, updatedDoc);
+            res.send(resullt);
+        })
     }
 
     finally {
